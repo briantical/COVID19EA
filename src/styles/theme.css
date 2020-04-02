@@ -1,0 +1,48 @@
+._container {
+}
+._container--open {
+}
+._input {
+  height: 2rem;
+  width: 20rem;
+  font-size: 1rem;
+  color: rgb(28, 29, 20);
+  border-radius: 0.5rem;
+  border: 0.2rem solid rgb(51, 51, 51);
+}
+._input::placeholder {
+  font-size: 1rem;
+  color: rgb(214, 214, 214);
+}
+._input--open {
+}
+._input--focused {
+}
+._suggestions-container {
+  height: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+._suggestions-container--open {
+  background-color: rgb(51, 51, 51);
+}
+._suggestions-list {
+  list-style: none;
+}
+._suggestion {
+  color: rgb(214, 214, 214);
+  font-size: 1rem;
+  font-weight: 700;
+}
+._suggestion--first {
+}
+._suggestion--highlighted {
+}
+._section-container {
+}
+._section-container--first {
+}
+._section-title {
+}

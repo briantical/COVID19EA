@@ -2,11 +2,33 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import Autosuggest from "react-autosuggest";
 
+import "./../styles/theme.css";
+
 const logo = require("./../assets/header_logo.png");
 const WHO = require("./../assets/who.png");
+const about = require("./../assets/about.png");
+const prevention = require("./../assets/prevention.png");
+const treatment = require("./../assets/treatment.png");
+
+const theme = {
+  container: "_container",
+  containerOpen: "_container--open",
+  input: "_input",
+  inputOpen: "_input--open",
+  inputFocused: "_input--focused",
+  suggestionsContainer: "_suggestions-container",
+  suggestionsContainerOpen: "_suggestions-container--open",
+  suggestionsList: "_suggestions-list",
+  suggestion: "_suggestion",
+  suggestionFirst: "_suggestion--first",
+  suggestionHighlighted: "_suggestion--highlighted",
+  sectionContainer: "_section-container",
+  sectionContainerFirst: "_section-container--first",
+  sectionTitle: "_section-title"
+};
 
 // Imagine you have a list of countries that you'd like to autosuggest.
-const languages = [
+const countries = [
   {
     name: "Uganda"
   },
@@ -31,8 +53,9 @@ const getSuggestions = value => {
 
   return inputLength === 0
     ? []
-    : languages.filter(
-        lang => lang.name.toLowerCase().slice(0, inputLength) === inputValue
+    : countries.filter(
+        country =>
+          country.name.toLowerCase().slice(0, inputLength) === inputValue
       );
 };
 
@@ -83,7 +106,7 @@ export class Home extends Component {
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: "Type a programming language",
+      placeholder: "Search by country (east africa)",
       value,
       onChange: this.onChange
     };
@@ -101,14 +124,79 @@ export class Home extends Component {
             id="header_logo"
           />
         </header>
-        <Autosuggest
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          inputProps={inputProps}
-        />
+        <div className="content commons_vertical">
+          <div id="autosuggest" className="commons_vertical">
+            <Autosuggest
+              theme={theme}
+              suggestions={suggestions}
+              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+              getSuggestionValue={getSuggestionValue}
+              renderSuggestion={renderSuggestion}
+              inputProps={inputProps}
+            />
+          </div>
+          <div id="support_information">
+            <div className="support_information_div">
+              <div>
+                <img
+                  src={about}
+                  alt="About COVID-19"
+                  title="About COVID-19"
+                  className="support_logos"
+                />
+              </div>
+              <div className="information">
+                <div className="info_header">About COVID-19</div>
+                <span className="info">
+                  An up-to-date rundown of the virus and its symptoms.
+                </span>
+                <span>
+                  <a href="/aboutcovid">Learn more ...</a>
+                </span>
+              </div>
+            </div>
+            <div className="support_information_div">
+              <div>
+                <img
+                  src={prevention}
+                  alt="Preventing COVID-19"
+                  title="Preventing COVID-19"
+                  className="support_logos"
+                />
+              </div>
+              <div className="information">
+                <div className="info_header">Prevention</div>
+                <span className="info">
+                  Information about social distancing, sanitizing, and more.
+                </span>
+                <span>
+                  <a href="/prevention">Learn more ...</a>
+                </span>
+              </div>
+            </div>
+            <div className="support_information_div">
+              <div>
+                <img
+                  src={treatment}
+                  alt="Treatment for COVID-19"
+                  title="Treatment for COVID-19"
+                  className="support_logos"
+                />
+              </div>
+              <div className="information">
+                <div className="info_header">Treatment</div>
+                <span className="info">
+                  Guidance on testing , keeping healthy and treatment
+                </span>
+                <span>
+                  <a href="/treatment">Learn more ...</a>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="who_logo">
           <img src={WHO} alt="WHO Log" title="Data provided by WHO" />
         </div>
