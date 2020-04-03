@@ -151,9 +151,7 @@ export class Home extends Component {
                 <span className="info">
                   An up-to-date rundown of the virus and its symptoms.
                 </span>
-                <span>
-                  <a href="/aboutcovid">Learn more ...</a>
-                </span>
+                <a href="/aboutcovid">Learn more ...</a>
               </div>
             </div>
             <div className="support_information_div">
@@ -170,9 +168,7 @@ export class Home extends Component {
                 <span className="info">
                   Information about social distancing, sanitizing, and more.
                 </span>
-                <span>
-                  <a href="/prevention">Learn more ...</a>
-                </span>
+                <a href="/prevention">Learn more ...</a>
               </div>
             </div>
             <div className="support_information_div">
@@ -189,11 +185,16 @@ export class Home extends Component {
                 <span className="info">
                   Guidance on testing , keeping healthy and treatment
                 </span>
-                <span>
-                  <a href="/treatment">Learn more ...</a>
-                </span>
+                <a href="/treatment">Learn more ...</a>
               </div>
             </div>
+          </div>
+          <div id="about_website">
+            <p>
+              This website is a resource to help inform the public, in order to
+              guide a response, improve care, and save lives.
+            </p>
+            <p>COVID19EA</p>
           </div>
         </div>
 
