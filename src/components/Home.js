@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 
 import "./../styles/theme.css";
@@ -103,6 +104,7 @@ export class Home extends Component {
   };
   render() {
     const { value, suggestions } = this.state;
+    const { history } = this.props;
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
@@ -133,6 +135,7 @@ export class Home extends Component {
               onSuggestionsClearRequested={this.onSuggestionsClearRequested}
               getSuggestionValue={getSuggestionValue}
               renderSuggestion={renderSuggestion}
+              onSuggestionSelected={() => history.push("/country")}
               inputProps={inputProps}
             />
           </div>
@@ -210,4 +213,4 @@ const mapStateToProps = state => ({});
 
 const mapDispatchToProps = {};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Home));

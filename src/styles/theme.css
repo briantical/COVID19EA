@@ -1,23 +1,26 @@
-._container {
+/* ._container {
 }
 ._container--open {
-}
+} */
 ._input {
   height: 2rem;
   width: 20rem;
   font-size: 1rem;
   color: rgb(28, 29, 20);
   border-radius: 0.5rem;
-  border: 0.2rem solid rgb(51, 51, 51);
+  background-color: rgb(250, 250, 250);
+  border: 0.15rem solid rgb(51, 51, 51);
 }
 ._input::placeholder {
   font-size: 1rem;
   color: rgb(214, 214, 214);
 }
-._input--open {
-}
+/* ._input--open {
+} */
 ._input--focused {
+  outline: none;
 }
+
 ._suggestions-container {
   height: 2rem;
   display: flex;
@@ -36,13 +39,13 @@
   font-size: 1rem;
   font-weight: 700;
 }
-._suggestion--first {
+/* ._suggestion--first {
 }
 ._suggestion--highlighted {
-}
-._section-container {
+} */
+/* ._section-container {
 }
 ._section-container--first {
 }
 ._section-title {
-}
+} */
