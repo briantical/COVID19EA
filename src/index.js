@@ -4,6 +4,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import "./styles/index.css";
 import "./styles/theme.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
