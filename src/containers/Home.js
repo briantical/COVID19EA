@@ -73,15 +73,12 @@ export class Home extends Component {
               </div>
             </div>
           </div>
-          <div
-            className="row align-items-center justify-content-center row-cols-1"
-            id="about_website"
-          >
-            <div className="col align-items-center">
+          <div id="about_website">
+            <p>
               This website is a resource to help inform the public, in order to
               guide a response, improve care, and save lives.
-            </div>
-            <div className="col align-items-center ">COVID19EA</div>
+            </p>
+            <p>COVID19EA</p>
           </div>
         </div>
         <img
