@@ -101,8 +101,8 @@ export class AutoSuggest extends Component {
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
-            onSuggestionSelected={() =>
-              history.push("/country/:country=" + suggestions)
+            onSuggestionSelected={(event, { suggestionValue }) =>
+              history.push("/country/" + suggestionValue)
             }
             inputProps={inputProps}
           />
