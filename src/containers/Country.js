@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import MyChart from "./components/_Chart";
+import { TwitterTweetEmbed } from "react-twitter-embed";
+import twitter from "./../utils/twitter";
 
 import { Header } from "./components";
 import {
@@ -19,7 +22,7 @@ export class Country extends Component {
         params: { country },
       },
     } = this.props;
-
+    this.getTweetsSince("Brian", "2020-01-23");
     this.getReportByCountry(country.toLowerCase());
     this.getReportsByCountry(country);
   }
@@ -54,6 +57,21 @@ export class Country extends Component {
     }
   };
 
+  getTweetsSince = async (keyword, period) => {
+    try {
+      await twitter.get(
+        "search/tweets",
+        { q: keyword + " since:" + period, count: 100 },
+        function (err, data, response) {
+          console.log(data);
+          return data;
+        }
+      );
+    } catch (error) {
+      return error;
+    }
+  };
+
   render() {
     let {
       report: {
@@ -63,7 +81,6 @@ export class Country extends Component {
         deaths = "__",
         recovered = "__",
       },
-      reports,
     } = this.props;
 
     return (
@@ -74,7 +91,6 @@ export class Country extends Component {
         <Header />
         <div className="row content no-gutters">
           <div className="col-sm-8">
-            {"This is data 2: " + JSON.stringify(reports)}
             <div className="row" style={{ margin: "0rem 1rem" }}>
               <table className="table table-hover table-striped">
                 <thead className="thead-dark">
@@ -108,9 +124,13 @@ export class Country extends Component {
                 </tbody>
               </table>
             </div>
+            <div>
+              <MyChart />
+            </div>
+            <div>{process.env.REACT_APP_CONSUMER_KEY}</div>
           </div>
-          <div className="col-sm-4" style={{ backgroundColor: "blue" }}>
-            Social media
+          <div className="col-sm-4">
+            <TwitterTweetEmbed tweetId={"933354946111705097"} />
           </div>
         </div>
         <img

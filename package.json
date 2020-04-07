@@ -20,7 +20,10 @@
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.1",
+    "react-twitter-embed": "^3.0.3",
     "redux": "^4.0.5",
+    "twit": "^2.2.11",
+    "twitter-lite": "^0.9.4",
     "zlib": "^1.0.5"
   },
   "scripts": {
@@ -43,5 +46,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "https://cors-anywhere.herokuapp.com/"
 }
