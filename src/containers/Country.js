@@ -1,46 +1,118 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
-// im"covid19-api";
+import axios from "axios";
 
 import { Header } from "./components";
+import {
+  setCountryReport,
+  setCountryReports,
+  setErrorMessage,
+} from "./../actions";
+
 const WHO = require("./../assets/who.png");
 
-const vovid = require("covid19-api");
-
 export class Country extends Component {
-  getCountryData = () => {
-    // let {
-    //   match: {
-    //     params: { country },
-    //   },
-    // } = this.props;
-    // fetch("https://pomber.github.io/covid19/timeseries.json")
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     data[country].forEach(({ date, confirmed, recovered, deaths }) =>
-    //       console.log(
-    //         `${date} Confirmed cases : ${confirmed}  Recovered cases : ${recovered} Deaths : ${deaths}`
-    //       )
-    //     );
-    //   });
-    // covidapi.getReportsByCountries([country.toLowerCase()]);
-    // getReports();
-  };
-
-  render() {
+  constructor(props) {
+    super(props);
     let {
       match: {
         params: { country },
       },
     } = this.props;
 
-    this.getCountryData();
+    this.getReportByCountry(country.toLowerCase());
+    this.getReportsByCountry(country);
+  }
+
+  getReportByCountry = async (country) => {
+    try {
+      let country_report = await axios.get(
+        `https://covid19-server.chrismichael.now.sh/api/v1/ReportsByCountries/${country.toLowerCase()}`
+      );
+      let {
+        data: { report },
+      } = country_report;
+      this.props.setCountryReport(report);
+    } catch (error) {
+      this.props.setErrorMessage(error);
+    }
+  };
+
+  getReportsByCountry = async (country) => {
+    try {
+      let country_reports = await axios.get(
+        `https://pomber.github.io/covid19/timeseries.json`
+      );
+      let {
+        data: { [country]: reports },
+      } = country_reports;
+
+      this.props.setCountryReports(reports);
+    } catch (error) {
+      console.log(error);
+      this.props.setErrorMessage(error);
+    }
+  };
+
+  render() {
+    let {
+      report: {
+        country = "__",
+        flag,
+        cases = "__",
+        deaths = "__",
+        recovered = "__",
+      },
+      reports,
+    } = this.props;
 
     return (
-      <div className="container-fluid no-gutters px-0">
+      <div
+        className="container-fluid no-gutters px-0"
+        style={{ position: "relative", overflow: "scroll" }}
+      >
         <Header />
-        <div className="content commons_vertical">Country Data : {country}</div>
+        <div className="row content no-gutters">
+          <div className="col-sm-8">
+            {"This is data 2: " + JSON.stringify(reports)}
+            <div className="row" style={{ margin: "0rem 1rem" }}>
+              <table className="table table-hover table-striped">
+                <thead className="thead-dark">
+                  <tr>
+                    <th colSpan={2}>Country statistics</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Country</td>
+                    <td>
+                      <img
+                        src={flag}
+                        title={`${country} flag`}
+                        alt={`${country}`}
+                      />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Confirmed cases</td>
+                    <td>{cases}</td>
+                  </tr>
+                  <tr>
+                    <td>Deaths</td>
+                    <td>{deaths}</td>
+                  </tr>
+                  <tr>
+                    <td>Recovered</td>
+                    <td>{recovered}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div className="col-sm-4" style={{ backgroundColor: "blue" }}>
+            Social media
+          </div>
+        </div>
         <img
           src={WHO}
           alt="WHO Log"
@@ -53,8 +125,15 @@ export class Country extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  let { report, reports, error } = state;
+  return { report, reports, error };
+};
 
-const mapDispatchToProps = {};
+const mapDispatchToProps = {
+  setCountryReport,
+  setCountryReports,
+  setErrorMessage,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Country);
