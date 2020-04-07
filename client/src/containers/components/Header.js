@@ -1,5 +1,5 @@
 import React from "react";
-const logo = require("../../assets/header_logo.png");
+const logo = require("./../../assets/header_logo.png");
 
 const Header = () => {
   return (

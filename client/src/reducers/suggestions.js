@@ -1,4 +1,4 @@
-import { SET_TYPING_SUGGESTIONS } from "../constants/action-types";
+import { SET_TYPING_SUGGESTIONS } from "./../constants/action-types";
 
 const suggestions = (state = [], action) => {
   switch (action.type) {

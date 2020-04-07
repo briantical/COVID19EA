@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 
-import { setTypingSuggestions, setTypingValue } from "../../actions";
+import { setTypingSuggestions, setTypingValue } from "./../../actions";
 
 // Custom autosugggest stlying theme
 const theme = {
@@ -101,8 +101,8 @@ export class AutoSuggest extends Component {
             onSuggestionsClearRequested={this.onSuggestionsClearRequested}
             getSuggestionValue={getSuggestionValue}
             renderSuggestion={renderSuggestion}
-            onSuggestionSelected={() =>
-              history.push("/country/:country=" + suggestions)
+            onSuggestionSelected={(event, { suggestionValue }) =>
+              history.push("/country/" + suggestionValue)
             }
             inputProps={inputProps}
           />
