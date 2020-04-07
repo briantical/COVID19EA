@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 import { Header } from "./components";
-const WHO = require("./../assets/who.png");
+const WHO = require("../assets/who.png");
 
 export class Country extends Component {
   render() {

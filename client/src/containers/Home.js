@@ -6,10 +6,10 @@ import { withRouter } from "react-router-dom";
 import { Header, AutoSuggest } from "./components";
 
 // Assets
-const WHO = require("./../assets/who.png");
-const about = require("./../assets/about.png");
-const prevention = require("./../assets/prevention.png");
-const treatment = require("./../assets/treatment.png");
+const WHO = require("../assets/who.png");
+const about = require("../assets/about.png");
+const prevention = require("../assets/prevention.png");
+const treatment = require("../assets/treatment.png");
 
 export class Home extends Component {
   render() {

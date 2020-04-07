@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Switch, Route } from "react-router-dom";
-import { NoMatch, Home, Country, Region } from "./../containers";
+import { NoMatch, Home, Country, Region } from "../containers";
 
 const Index = () => {
   return (

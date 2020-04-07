@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 
-import { setTypingSuggestions, setTypingValue } from "./../../actions";
+import { setTypingSuggestions, setTypingValue } from "../../actions";
 
 // Custom autosugggest stlying theme
 const theme = {
