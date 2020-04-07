@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "The server for covid19ea",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Covid19ea",
+    "covid19",
+    "coronavirus"
+  ],
+  "author": "LUTAAYA Brian Ivan",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "covid19-api": "^1.1.8",
+    "express": "^4.17.1",
+    "twit": "^2.2.11"
+  }
+}
