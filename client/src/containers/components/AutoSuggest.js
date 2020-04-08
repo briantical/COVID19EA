@@ -5,6 +5,7 @@ import { withRouter } from "react-router-dom";
 import Autosuggest from "react-autosuggest";
 
 import { setTypingSuggestions, setTypingValue } from "./../../actions";
+import { countries } from "./../../constants/data";
 
 // Custom autosugggest stlying theme
 const theme = {
@@ -23,25 +24,6 @@ const theme = {
   sectionContainerFirst: "_section-container--first",
   sectionTitle: "_section-title",
 };
-
-// The list of countries that you'd like to autosuggest.
-const countries = [
-  {
-    name: "Burundi",
-  },
-  {
-    name: "Kenya",
-  },
-  {
-    name: "Rwanda",
-  },
-  {
-    name: "Tanzania",
-  },
-  {
-    name: "Uganda",
-  },
-];
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
 const getSuggestions = (value) => {

@@ -127,7 +127,6 @@ export class Country extends Component {
             <div>
               <MyChart />
             </div>
-            <div>{process.env.REACT_APP_CONSUMER_KEY}</div>
           </div>
           <div className="col-sm-4">
             <TwitterTweetEmbed tweetId={"933354946111705097"} />
