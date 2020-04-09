@@ -9,8 +9,11 @@ import { Header } from "./components";
 import {
   setCountryReport,
   setCountryReports,
+  setCountryTweets,
   setErrorMessage,
 } from "./../actions";
+
+import { countries } from "./../constants/data";
 
 const WHO = require("./../assets/who.png");
 
@@ -22,9 +25,13 @@ export class Country extends Component {
         params: { country },
       },
     } = this.props;
-    this.getTweetsSince("Brian", "2020-01-23");
+
+    let trend = countries.filter((_country) => _country.name == country)[0]
+      .trend;
+
     this.getReportByCountry(country.toLowerCase());
     this.getReportsByCountry(country);
+    this.getCountryTweets(trend);
   }
 
   getReportByCountry = async (country) => {
@@ -63,12 +70,25 @@ export class Country extends Component {
         "search/tweets",
         { q: keyword + " since:" + period, count: 100 },
         function (err, data, response) {
-          console.log(data);
           return data;
         }
       );
     } catch (error) {
       return error;
+    }
+  };
+
+  getCountryTweets = async (trend) => {
+    try {
+      let response = await axios.get(
+        `${process.env.REACT_APP_SERVER}twitter/?trend=${trend}`
+      );
+      let {
+        data: { tweets },
+      } = response;
+      this.props.setCountryTweets(tweets);
+    } catch (error) {
+      this.props.setErrorMessage(error);
     }
   };
 
@@ -81,6 +101,7 @@ export class Country extends Component {
         deaths = "__",
         recovered = "__",
       },
+      tweets,
     } = this.props;
 
     return (
@@ -106,7 +127,10 @@ export class Country extends Component {
                         src={flag}
                         title={`${country} flag`}
                         alt={`${country}`}
+                        className="img-fluid"
+                        style={{ height: "2rem" }}
                       />
+                      {`(${country})`}
                     </td>
                   </tr>
                   <tr>
@@ -129,7 +153,9 @@ export class Country extends Component {
             </div>
           </div>
           <div className="col-sm-4">
-            <TwitterTweetEmbed tweetId={"933354946111705097"} />
+            {tweets.map((tweet, index) => {
+              return <TwitterTweetEmbed tweetId={tweet} key={index} />;
+            })}
           </div>
         </div>
         <img
@@ -145,14 +171,15 @@ export class Country extends Component {
 }
 
 const mapStateToProps = (state) => {
-  let { report, reports, error } = state;
-  return { report, reports, error };
+  let { report, reports, error, tweets } = state;
+  return { report, reports, error, tweets };
 };
 
 const mapDispatchToProps = {
   setCountryReport,
   setCountryReports,
   setErrorMessage,
+  setCountryTweets,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Country);

@@ -1,7 +1,7 @@
 export const countries = [
   {
     name: "Burundi",
-    trend: "COVID19BUR",
+    trend: "coronavirus BURUNDI",
   },
   {
     name: "Kenya",

@@ -4,6 +4,7 @@ import {
   SET_COUNTRY_REPORT,
   SET_COUNTRY_REPORTS,
   SET_ERROR_MESSAGE,
+  SET_COUNTRY_TWEETS,
 } from "./../constants/action-types";
 
 export const setTypingValue = (value) => ({
@@ -29,4 +30,9 @@ export const setCountryReports = (reports) => ({
 export const setErrorMessage = (error) => ({
   type: SET_ERROR_MESSAGE,
   payload: error,
+});
+
+export const setCountryTweets = (tweets) => ({
+  type: SET_COUNTRY_TWEETS,
+  payload: tweets,
 });
