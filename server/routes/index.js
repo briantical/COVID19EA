@@ -1,11 +1,11 @@
-const { Router } = require("express");
+const { Router } = require('express');
+
 const router = Router();
+const twitterRoutes = require('./twitter');
+const covidRoutes = require('./covid');
 
-const twitter_routes = require("./twitter");
-const covid_routes = require("./covid");
+router.use('/twitter', twitterRoutes);
 
-router.use("/twitter", twitter_routes);
-
-router.use("/covid", covid_routes);
+router.use('/covid', covidRoutes);
 
 module.exports = router;
