@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import axios from "axios";
 import MyChart from "./components/_Chart";
 import { TwitterTweetEmbed } from "react-twitter-embed";
-import twitter from "./../utils/twitter";
 
 import { Header } from "./components";
 import {
@@ -26,7 +25,7 @@ export class Country extends Component {
       },
     } = this.props;
 
-    let trend = countries.filter((_country) => _country.name == country)[0]
+    let trend = countries.filter((_country) => _country.name === country)[0]
       .trend;
 
     this.getReportByCountry(country.toLowerCase());
@@ -61,20 +60,6 @@ export class Country extends Component {
     } catch (error) {
       console.log(error);
       this.props.setErrorMessage(error);
-    }
-  };
-
-  getTweetsSince = async (keyword, period) => {
-    try {
-      await twitter.get(
-        "search/tweets",
-        { q: keyword + " since:" + period, count: 100 },
-        function (err, data, response) {
-          return data;
-        }
-      );
-    } catch (error) {
-      return error;
     }
   };
 
