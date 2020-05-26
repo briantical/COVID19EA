@@ -4,7 +4,8 @@
   "description": "The tracker for the impact of Covid19 in East Africa",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "cd server && ts-node index"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,30 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-react-hooks": "^2.5.1",
+    "ts-node": "^8.10.1",
     "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.6",
+    "@types/twit": "^2.2.24",
+    "ajax": "0.0.4",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
+    "concurrently": "^5.2.0",
+    "covid19-api": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-autosuggest": "^10.0.2",
+    "react-bootstrap": "^1.0.1",
+    "react-charts": "^2.0.0-beta.6",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-twitter-embed": "^3.0.3",
+    "redux": "^4.0.5",
+    "twit": "^2.2.11",
+    "winston": "^3.2.1"
   }
 }
