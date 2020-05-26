@@ -1,4 +1,4 @@
-import { SET_ERROR_MESSAGE } from "./../constants/action-types";
+import { SET_ERROR_MESSAGE } from './../constants/action-types';
 
 const error = (state = {}, action) => {
   switch (action.type) {
