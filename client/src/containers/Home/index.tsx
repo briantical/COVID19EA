@@ -4,6 +4,8 @@ import { withRouter } from 'react-router-dom';
 
 import { Header, AutoSuggest } from '../components';
 
+import './index.css';
+
 // Assets
 const WHO = require('./../../assets/who.png');
 const about = require('./../../assets/about.png');
@@ -14,7 +16,7 @@ const Home: FC<{}> = () => {
   return (
     <div className="container-fluid no-gutters px-0" style={{ position: 'relative', overflow: 'scroll' }}>
       <Header />
-      <div className="content commons_vertical">
+      <div className="content">
         <AutoSuggest />
         <div id="support_information" className="row">
           <div className="col-sm support_information_div">

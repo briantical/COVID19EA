@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd server && ts-node index",
-    "client": "parcel client/public/index.html"
+    "client": "parcel client/public/index.html",
+    "dev": "concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",

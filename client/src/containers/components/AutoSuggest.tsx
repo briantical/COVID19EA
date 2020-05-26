@@ -3,9 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
+import { Row } from 'react-bootstrap';
 
-import { setTypingSuggestions, setTypingValue } from '../../actions';
-import { countries } from '../../constants/data';
+import { setTypingSuggestions, setTypingValue } from './../../actions';
+import { countries } from './../../constants/data';
 
 // Custom autosugggest stlying theme
 const theme = {
@@ -71,25 +72,23 @@ export class AutoSuggest extends Component {
 
     // Finally, render it!
     return (
-      <div className="content commons_vertical">
-        <div id="autosuggest" className="commons_vertical">
-          <Autosuggest
-            theme={theme}
-            suggestions={suggestions}
-            onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-            onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-            getSuggestionValue={getSuggestionValue}
-            renderSuggestion={renderSuggestion}
-            onSuggestionSelected={(event, { suggestionValue }) => history.push('/country/' + suggestionValue)}
-            inputProps={inputProps}
-          />
-        </div>
-      </div>
+      <Row id="autosuggest" className="commons_vertical">
+        <Autosuggest
+          theme={theme}
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestionValue}
+          renderSuggestion={renderSuggestion}
+          onSuggestionSelected={(_event: any, { suggestionValue }) => history.push('/country/' + suggestionValue)}
+          inputProps={inputProps}
+        />
+      </Row>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state: any) => {
   const { typing, suggestions } = state;
   return { typing, suggestions };
 };
