@@ -1,11 +1,9 @@
 // Native modules
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import React, { FC, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Autosuggest from 'react-autosuggest';
 import { Row } from 'react-bootstrap';
 
-import { setTypingSuggestions, setTypingValue } from './../../actions';
 import { countries } from './../../constants/data';
 
 // Custom autosugggest stlying theme
@@ -27,7 +25,7 @@ const theme = {
 };
 
 // Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = (value) => {
+const getSuggestions = (value: string) => {
   const inputValue = value.trim().toLowerCase();
   const inputLength = inputValue.length;
 
@@ -39,63 +37,61 @@ const getSuggestions = (value) => {
 // When suggestion is clicked, Autosuggest needs to populate the input
 // based on the clicked suggestion. Teach Autosuggest how to calculate the
 // input value for every given suggestion.
-const getSuggestionValue = (suggestion) => suggestion.name;
+const getSuggestionValue = (suggestion: ISuggestions) => suggestion.name;
 
 // Use your imagination to render suggestions.
-const renderSuggestion = (suggestion) => <div>{suggestion.name}</div>;
+const renderSuggestion = (suggestion: ISuggestions) => <div>{suggestion.name}</div>;
 
-export class AutoSuggest extends Component {
-  onChange = (event, { newValue }) => {
-    this.props.setTypingValue(newValue);
+interface ISuggestions {
+  name: string;
+  trend: string;
+}
+
+const initialSuggestions: ISuggestions[] = [{ name: '', trend: '' }];
+
+const AutoSuggest: FC<{}> = () => {
+  const history = useHistory();
+
+  const [value, setTypingValue] = useState('');
+  const [suggestions, setTypingSuggestions] = useState<ISuggestions[]>(initialSuggestions);
+
+  const onChange = (_event: React.ChangeEvent, { newValue }: { newValue: string }) => {
+    setTypingValue(newValue);
   };
 
   // Autosuggest will call this function every time you need to update suggestions.
   // You already implemented this logic above, so just use it.
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.props.setTypingSuggestions(getSuggestions(value));
+  const onSuggestionsFetchRequested = ({ value }: { value: string }) => {
+    setTypingSuggestions(getSuggestions(value));
   };
 
   // Autosuggest will call this function every time you need to clear suggestions.
-  onSuggestionsClearRequested = () => {
-    this.props.setTypingSuggestions([]);
+  const onSuggestionsClearRequested = () => {
+    setTypingSuggestions([]);
   };
 
-  render() {
-    const { history, typing: value, suggestions } = this.props;
+  // Autosuggest will pass through all these props to the input.
+  const inputProps = {
+    placeholder: 'Search by country (east africa)',
+    value,
+    onChange: onChange
+  };
 
-    // Autosuggest will pass through all these props to the input.
-    const inputProps = {
-      placeholder: 'Search by country (east africa)',
-      value,
-      onChange: this.onChange
-    };
-
-    // Finally, render it!
-    return (
-      <Row id="autosuggest" className="commons_vertical">
-        <Autosuggest
-          theme={theme}
-          suggestions={suggestions}
-          onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-          onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-          getSuggestionValue={getSuggestionValue}
-          renderSuggestion={renderSuggestion}
-          onSuggestionSelected={(_event: any, { suggestionValue }) => history.push('/country/' + suggestionValue)}
-          inputProps={inputProps}
-        />
-      </Row>
-    );
-  }
-}
-
-const mapStateToProps = (state: any) => {
-  const { typing, suggestions } = state;
-  return { typing, suggestions };
+  // Finally, render it!
+  return (
+    <Row id="autosuggest" className="commons_vertical">
+      <Autosuggest
+        theme={theme}
+        suggestions={suggestions}
+        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+        onSuggestionsClearRequested={onSuggestionsClearRequested}
+        getSuggestionValue={getSuggestionValue}
+        renderSuggestion={renderSuggestion}
+        onSuggestionSelected={(_event: any, { suggestionValue }) => history.push('/country/' + suggestionValue)}
+        inputProps={inputProps}
+      />
+    </Row>
+  );
 };
 
-const mapDispatchToProps = {
-  setTypingSuggestions,
-  setTypingValue
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(AutoSuggest));
+export default AutoSuggest;
