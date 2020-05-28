@@ -1,22 +1,23 @@
 {
   "name": "covid19ea",
-  "version": "1.0.0",
-  "description": "An application to track and notify the updates on Coronavirus in East Africa",
+  "version": "1.0.1",
+  "description": "The tracker for the impact of Covid19 in East Africa",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client": "cd client && yarn start",
-    "server": "cd server && npm start",
-    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
+    "server": "cd server && ts-node index",
+    "client": "parcel client/public/index.html",
+    "dev": "concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/briantical/COVID19EA.git"
   },
   "keywords": [
-    "Covid19ea",
     "Covid19",
-    "Coronavirus"
+    "Coronavirus",
+    "East",
+    "Africa"
   ],
   "author": "LUTAAYA Brian Ivan",
   "license": "MIT",
@@ -24,8 +25,45 @@
     "url": "https://github.com/briantical/COVID19EA/issues"
   },
   "homepage": "https://github.com/briantical/COVID19EA#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^3.0.1",
+    "@typescript-eslint/parser": "^3.0.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.1.0",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^2.5.1",
+    "parcel-bundler": "^1.12.4",
+    "ts-node": "^8.10.1",
+    "typescript": "^3.9.3"
+  },
   "dependencies": {
-    "concurrently": "^5.1.0"
+    "@types/express": "^4.17.6",
+    "@types/react-autosuggest": "^9.3.14",
+    "@types/react-redux": "^7.1.9",
+    "@types/react-router-dom": "^5.1.5",
+    "@types/twit": "^2.2.24",
+    "ajax": "0.0.4",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "bootstrap": "^4.5.0",
+    "concurrently": "^5.2.0",
+    "covid19-api": "^1.2.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-autosuggest": "^10.0.2",
+    "react-bootstrap": "^1.0.1",
+    "react-charts": "^2.0.0-beta.6",
+    "react-dom": "^16.13.1",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-twitter-embed": "^3.0.3",
+    "redux": "^4.0.5",
+    "twit": "^2.2.11",
+    "winston": "^3.2.1"
   }
 
 }
