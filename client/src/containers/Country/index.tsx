@@ -1,11 +1,13 @@
 import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 import { Header } from '../components';
 import Canvas from '../components/Canvas';
 
+import './index.css';
 import { countries } from './../../constants/data';
 
 const WHO = require('./../../assets/who.png');
@@ -103,7 +105,7 @@ const Country: FC<{}> = () => {
       <Header />
       <div className="row content no-gutters">
         <div className="col-sm-8">
-          <div className="row" style={{ margin: '0rem 1rem' }}>
+          <div className="row" style={{ margin: '1rem' }}>
             <table className="table table-hover table-striped">
               <thead className="thead-dark">
                 <tr>
@@ -114,7 +116,7 @@ const Country: FC<{}> = () => {
                 <tr>
                   <td>Country</td>
                   <td>
-                    <img src={flag} title={`${country} flag`} alt={`${country}`} />
+                    <img src={flag} title={`${country} flag`} alt={`${country}`} style={{ maxHeight: '2rem' }} />
                   </td>
                 </tr>
                 <tr>
@@ -132,9 +134,9 @@ const Country: FC<{}> = () => {
               </tbody>
             </table>
           </div>
-          <div>
+          <Row noGutters id="canvas">
             <Canvas reports={reports} />
-          </div>
+          </Row>
         </div>
         <div className="col-sm-4">
           {countries.map((_country, index) => {

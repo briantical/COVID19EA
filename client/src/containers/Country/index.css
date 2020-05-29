@@ -1,0 +1,5 @@
+#canvas {
+  padding: 1rem;
+  overflow: auto;
+  white-space: nowrap;
+}
