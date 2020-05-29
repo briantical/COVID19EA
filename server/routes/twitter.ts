@@ -32,11 +32,11 @@ twitter_routes.get('/', (req, res) => {
 
   let { trend = 'coronavirus' } = req.query;
 
-  //   Get 20 the tweets about #trend in the past week
+  // Get 20 the tweets about #trend in the past week
   Twitter.get('search/tweets', { q: `#${trend} since:${_date}`, count: 20 }, (error: any, data: any) => {
     if (error) {
-      res.status(500).json({ error });
       Logger.error(error);
+      res.status(500).json({ error });
     } else {
       let { statuses } = data;
       statuses.map((status: any) => {
