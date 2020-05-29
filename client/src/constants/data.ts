@@ -23,10 +23,10 @@ export const countries = [
     name: 'Uganda',
     trend: 'COVID19UG',
     org: 'MinofHealthUG'
-  },
-  {
-    name: 'East Africa',
-    trend: 'COVID19EA',
-    org: 'WHOAFRO'
   }
+  // {
+  //   name: 'East Africa',
+  //   trend: 'COVID19EA',
+  //   org: 'WHOAFRO'
+  // }
 ];

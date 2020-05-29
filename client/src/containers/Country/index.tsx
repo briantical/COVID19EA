@@ -133,7 +133,7 @@ const Country: FC<{}> = () => {
             </table>
           </div>
           <div>
-            <Canvas {...reports} />
+            <Canvas reports={reports} />
           </div>
         </div>
         <div className="col-sm-4">
