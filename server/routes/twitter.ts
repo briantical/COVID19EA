@@ -25,7 +25,7 @@ const Twitter = new Twit({
 const twitter_routes = Router();
 
 twitter_routes.get('/', (req, res) => {
-  let tweets: number[] = [];
+  let tweets: string[] = [];
   //Get the date one week back
   let date = new Date(Date.now() - 604800000);
   let _date = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
@@ -40,8 +40,8 @@ twitter_routes.get('/', (req, res) => {
     } else {
       let { statuses } = data;
       statuses.map((status: any) => {
-        let { id } = status;
-        tweets = [...tweets, id];
+        let { id_str } = status;
+        tweets = [...tweets, id_str];
       });
       res.json({ tweets });
     }

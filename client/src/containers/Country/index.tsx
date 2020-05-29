@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 import { Header } from '../components';
 import Canvas from '../components/Canvas';
@@ -44,7 +44,7 @@ const Country: FC<{}> = () => {
   const { country } = useParams();
 
   const [error, setErrorMessage] = useState('');
-  const [tweets, setTweets] = useState<number[]>([1265986269466722300]);
+  const [tweets, setTweets] = useState<string[]>(['1222968733829865477']);
   const [reports, setCountryReports] = useState<IReports[]>([initialReports]);
   const [report, setCountryReport] = useState<IReport>(initialReport);
 
@@ -60,7 +60,7 @@ const Country: FC<{}> = () => {
             setTweets(_tweets);
           })
           .catch((error) => {
-            setTweets([1265986269466722300]);
+            setTweets(['1222968733829865477']);
             setErrorMessage(error);
           });
       }
@@ -137,9 +137,18 @@ const Country: FC<{}> = () => {
           </div>
         </div>
         <div className="col-sm-4">
-          {/* {tweets.map((tweet, index) => {
-            <TwitterTweetEmbed tweetId={tweet.toString()} key={index} />;
-          })} */}
+          {countries.map((_country, index) => {
+            if (_country.name == country) {
+              return (
+                <TwitterTimelineEmbed
+                  sourceType="profile"
+                  screenName={_country.org}
+                  options={{ height: 400 }}
+                  key={index}
+                />
+              );
+            }
+          })}
         </div>
       </div>
       <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
