@@ -1,6 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { Row } from 'react-bootstrap';
 import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
@@ -100,62 +100,66 @@ const Country: FC<{}> = () => {
   }, [country]);
 
   const { flag, cases, deaths, recovered } = report;
-  return (
-    <div className="container-fluid no-gutters px-0" style={{ position: 'relative', overflow: 'scroll' }}>
-      <Header />
-      <div className="row content no-gutters">
-        <div className="col-sm-8">
-          <div className="row" style={{ margin: '1rem' }}>
-            <table className="table table-hover table-striped">
-              <thead className="thead-dark">
-                <tr>
-                  <th colSpan={2}>Country statistics</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Country</td>
-                  <td>
-                    <img src={flag} title={`${country} flag`} alt={`${country}`} style={{ maxHeight: '2rem' }} />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Confirmed cases</td>
-                  <td>{cases}</td>
-                </tr>
-                <tr>
-                  <td>Deaths</td>
-                  <td>{deaths}</td>
-                </tr>
-                <tr>
-                  <td>Recovered</td>
-                  <td>{recovered}</td>
-                </tr>
-              </tbody>
-            </table>
+  if (['Uganda', 'Kenya', 'Tanzania', 'Rwanda', 'Burundi'].includes(country)) {
+    return (
+      <div className="container-fluid no-gutters px-0" style={{ position: 'relative', overflow: 'scroll' }}>
+        <Header />
+        <div className="row content no-gutters">
+          <div className="col-sm-8">
+            <div className="row" style={{ margin: '1rem' }}>
+              <table className="table table-hover table-striped">
+                <thead className="thead-dark">
+                  <tr>
+                    <th colSpan={2}>Country statistics</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Country</td>
+                    <td>
+                      <img src={flag} title={`${country} flag`} alt={`${country}`} style={{ maxHeight: '2rem' }} />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Confirmed cases</td>
+                    <td>{cases}</td>
+                  </tr>
+                  <tr>
+                    <td>Deaths</td>
+                    <td>{deaths}</td>
+                  </tr>
+                  <tr>
+                    <td>Recovered</td>
+                    <td>{recovered}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <Row noGutters id="canvas">
+              <Canvas reports={reports} />
+            </Row>
           </div>
-          <Row noGutters id="canvas">
-            <Canvas reports={reports} />
-          </Row>
+          <div className="col-sm-4">
+            {countries.map((_country, index) => {
+              if (_country.name == country) {
+                return (
+                  <TwitterTimelineEmbed
+                    sourceType="profile"
+                    screenName={_country.org}
+                    options={{ height: 600 }}
+                    key={index}
+                  />
+                );
+              }
+            })}
+          </div>
         </div>
-        <div className="col-sm-4">
-          {countries.map((_country, index) => {
-            if (_country.name == country) {
-              return (
-                <TwitterTimelineEmbed
-                  sourceType="profile"
-                  screenName={_country.org}
-                  options={{ height: 600 }}
-                  key={index}
-                />
-              );
-            }
-          })}
-        </div>
+        <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
       </div>
-      <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
-    </div>
-  );
+    );
+  } else {
+    return <Redirect to="/" />;
+  }
 };
 
 export default Country;
