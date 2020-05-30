@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { FC } from 'react';
 import Chart from 'react-apexcharts';
 
 interface ISeries {
@@ -11,6 +11,10 @@ interface IReports {
   confirmed: number;
   deaths: number;
   recovered: number;
+}
+
+interface ICanvasProps {
+  reports: IReports[];
 }
 
 const getDays = (reports: IReports[]) => {
@@ -63,84 +67,77 @@ const getConfirmedCases = (reports: IReports[]) => {
   return cases;
 };
 
-class App extends Component<IReports[], {}> {
-  render() {
-    let { reports } = this.props;
-
-    // console.log([getConfirmedCases(reports), getRecoveredCases(reports), getDeathCases(reports)]);
-    // console.log(getDays(reports));
-    // console.log(getMaximumHeight(getConfirmedCases(reports).data));
-    // console.log(getMinimumHeight(getConfirmedCases(reports).data));
-    const series = [getConfirmedCases(reports), getRecoveredCases(reports), getDeathCases(reports)];
-    const options = {
-      chart: {
-        height: 350,
-        type: 'line',
-        dropShadow: {
-          enabled: true,
-          color: '#000',
-          top: 18,
-          left: 7,
-          blur: 10,
-          opacity: 0.2
-        },
-        toolbar: {
-          show: false
-        }
+const Canvas: FC<ICanvasProps> = (props) => {
+  const { reports } = props;
+  const series = [getConfirmedCases(reports), getRecoveredCases(reports), getDeathCases(reports)];
+  const options = {
+    chart: {
+      height: 350,
+      type: 'line',
+      dropShadow: {
+        enabled: true,
+        color: '#000',
+        top: 18,
+        left: 7,
+        blur: 10,
+        opacity: 0.2
       },
-      colors: ['#77B6EA', '#adff2f', '#ff0000'],
-      dataLabels: {
-        enabled: false
-      },
-      stroke: {
-        curve: 'smooth',
-        width: 2
-      },
-      title: {
-        text: 'Coronavirus statistics',
-        align: 'left'
-      },
-      grid: {
-        borderColor: '#e7e7e7',
-        row: {
-          colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-          opacity: 0.5
-        }
-      },
-      markers: {
-        size: 0
-      },
-      xaxis: {
-        categories: getDays(reports),
-        title: {
-          text: 'Days'
-        }
-      },
-      yaxis: {
-        title: {
-          text: 'Cases'
-        },
-        min: getMinimumHeight(getConfirmedCases(reports).data),
-        max: getMaximumHeight(getConfirmedCases(reports).data)
-      },
-      legend: {
-        position: 'top',
-        horizontalAlign: 'right',
-        floating: true,
-        offsetY: -25,
-        offsetX: -5
+      toolbar: {
+        show: false
       }
-    };
-    return (
-      <div className="app">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart options={options} series={series} type="line" width="600" />
-          </div>
+    },
+    colors: ['#77B6EA', '#adff2f', '#ff0000'],
+    dataLabels: {
+      enabled: false
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2
+    },
+    title: {
+      text: 'Coronavirus statistics',
+      align: 'left'
+    },
+    grid: {
+      borderColor: '#e7e7e7',
+      row: {
+        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
+        opacity: 0.5
+      }
+    },
+    markers: {
+      size: 0
+    },
+    xaxis: {
+      categories: getDays(reports),
+      title: {
+        text: 'Days'
+      }
+    },
+    yaxis: {
+      title: {
+        text: 'Cases'
+      },
+      min: getMinimumHeight(getConfirmedCases(reports).data),
+      max: getMaximumHeight(getConfirmedCases(reports).data)
+    },
+    legend: {
+      position: 'top',
+      horizontalAlign: 'right',
+      floating: true,
+      offsetY: -25,
+      offsetX: -5
+    }
+  };
+  return (
+    <div className="app" style={{ width: '100%' }}>
+      <div className="row" style={{ width: '100%' }}>
+        <div className="mixed-chart" style={{ width: '100%' }}>
+          <Chart options={options} series={series} type="line" width="600" />
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default App;
+export default Canvas;
