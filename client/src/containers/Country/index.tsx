@@ -145,7 +145,7 @@ const Country: FC<{}> = () => {
                 <TwitterTimelineEmbed
                   sourceType="profile"
                   screenName={_country.org}
-                  options={{ height: 400 }}
+                  options={{ height: 600 }}
                   key={index}
                 />
               );

@@ -13,7 +13,9 @@ const Header = () => {
         <a href="/support">Support</a>
       </Col>
       <Col className="col-3 commons_vertical">
-        <img className="img-fluid" src={logo} alt="COVID19EA Logo" title="COVID19EA Logo" id="header_logo" />
+        <a href="/">
+          <img className="img-fluid" src={logo} alt="COVID19EA Logo" title="COVID19EA Logo" id="header_logo" />
+        </a>
       </Col>
     </Row>
   );
