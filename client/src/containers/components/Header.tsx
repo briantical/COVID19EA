@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
 const logo = require('./../../assets/header_logo.png');
 
@@ -13,9 +14,9 @@ const Header = () => {
         <a href="/support">Support</a>
       </Col>
       <Col className="col-3 commons_vertical">
-        <a href="/">
+        <Link to="/">
           <img className="img-fluid" src={logo} alt="COVID19EA Logo" title="COVID19EA Logo" id="header_logo" />
-        </a>
+        </Link>
       </Col>
     </Row>
   );
