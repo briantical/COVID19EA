@@ -11,10 +11,6 @@ import './index.css';
 import { countries } from './../../constants/data';
 import assets from './../../assets/*.png';
 
-// console.log(assets);
-
-// const WHO = require('./../../assets/who.png');
-
 interface IReport {
   country: string;
   flag: string;

@@ -3,6 +3,9 @@
   "version": "1.0.1",
   "description": "The tracker for the impact of Covid19 in East Africa",
   "main": "index.js",
+  "engines": {
+    "node": "12.16.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "server": "cd server && ts-node index",
@@ -11,7 +14,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "dev": "concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "startserver": "cd dist/server && node index",
+    "start": "cd dist/server && node index",
     "postinstall": "tsc"
   },
   "repository": {
@@ -37,8 +40,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "gh-pages": "^3.0.0",
     "parcel-bundler": "^1.12.4",
-    "ts-node": "^8.10.1",
-    "typescript": "^3.9.3"
+    "ts-node": "^8.10.1"
   },
   "dependencies": {
     "@types/express": "^4.17.6",
@@ -67,6 +69,7 @@
     "react-router-dom": "^5.2.0",
     "react-twitter-embed": "^3.0.3",
     "twit": "^2.2.11",
+    "typescript": "^3.9.3",
     "winston": "^3.2.1"
   }
 }
