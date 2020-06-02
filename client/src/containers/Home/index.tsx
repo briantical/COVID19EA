@@ -1,11 +1,11 @@
 // Native modules
 import React, { FC } from 'react';
 import { withRouter } from 'react-router-dom';
+import { Row, Col } from 'react-bootstrap';
 
 import { Header, AutoSuggest } from '../components';
 
 import './index.css';
-
 import assets from './../../assets/*.png';
 
 const Home: FC<{}> = () => {
@@ -14,7 +14,7 @@ const Home: FC<{}> = () => {
       <Header />
       <div className="content">
         <AutoSuggest />
-        <div id="support_information" className="row">
+        <Row noGutters id="support_information" className="commons_horizontal">
           <div className="col-sm support_information_div">
             <img
               src={assets['about']}
@@ -55,20 +55,20 @@ const Home: FC<{}> = () => {
 
             <div className="col information">
               <div className="info_header">Treatment</div>
-              <span className="info">Guidance on testing , keeping healthy and treatment</span>
+              <span className="info">Guidance on testing, keeping healthy and treatment</span>
               <a href="/treatment">Learn more ...</a>
             </div>
           </div>
-        </div>
-        <div id="about_website">
+        </Row>
+        <Row noGutters id="about_website" className="commons_vertical">
           <p>
             This website is a resource to help inform the public, in order to guide a response, improve care, and save
             lives.
           </p>
-          <p>COVID19EA</p>
-        </div>
+          <p style={{ fontWeight: 'bold' }}>COVID19EA</p>
+        </Row>
       </div>
-      <img src={assets['header_logo']} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
+      <img src={assets['who']} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
     </div>
   );
 };

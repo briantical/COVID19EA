@@ -15,7 +15,7 @@ const Header = () => {
         <Link to="/support">Support</Link>
       </Col>
       <Col className="col-3 commons_vertical">
-        <Link to="/">
+        <Link to="/" style={{ width: '100%' }}>
           <img
             className="img-fluid"
             src={assets['header_logo']}
