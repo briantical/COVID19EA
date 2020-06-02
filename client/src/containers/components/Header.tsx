@@ -8,10 +8,10 @@ const Header = () => {
     <Row noGutters className="align-items-center justify-content-end" id="header">
       <Col></Col>
       <Col className="col-2 commons_vertical">
-        <a href="/resources">Resources</a>
+        <Link to="/resources">Resources</Link>
       </Col>
       <Col className="col-2 commons_vertical">
-        <a href="/support">Support</a>
+        <Link to="/support">Support</Link>
       </Col>
       <Col className="col-3 commons_vertical">
         <Link to="/">

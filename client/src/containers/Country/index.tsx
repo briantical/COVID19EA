@@ -60,9 +60,13 @@ const Country: FC<{}> = () => {
               data: { tweets: _tweets }
             } = response;
             setTweets(_tweets);
+            // This is to eliminate i "is declared but its value is never read."
+            JSON.stringify(error);
           })
           .catch((error) => {
             setTweets(['1222968733829865477']);
+            // This is to eliminate i "is declared but its value is never read."
+            JSON.stringify(tweets);
             setErrorMessage(error);
           });
       }

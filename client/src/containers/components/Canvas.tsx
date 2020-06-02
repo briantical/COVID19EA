@@ -130,12 +130,8 @@ const Canvas: FC<ICanvasProps> = (props) => {
     }
   };
   return (
-    <div className="app" style={{ width: '100%' }}>
-      <div className="row" style={{ width: '100%' }}>
-        <div className="mixed-chart" style={{ width: '100%' }}>
-          <Chart options={options} series={series} type="line" width="600" />
-        </div>
-      </div>
+    <div className="row no-gutters commons_vertical" style={{ width: '100%' }}>
+      <Chart options={options} series={series} type="line" width="600" />
     </div>
   );
 };
