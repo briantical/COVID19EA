@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Row, Col } from 'react-bootstrap';
-const logo = require('./../../assets/header_logo.png');
+
+import assets from './../../assets/*.png';
 
 const Header = () => {
   return (
@@ -15,7 +16,13 @@ const Header = () => {
       </Col>
       <Col className="col-3 commons_vertical">
         <Link to="/">
-          <img className="img-fluid" src={logo} alt="COVID19EA Logo" title="COVID19EA Logo" id="header_logo" />
+          <img
+            className="img-fluid"
+            src={assets['header_logo']}
+            alt="COVID19EA Logo"
+            title="COVID19EA Logo"
+            id="header_logo"
+          />
         </Link>
       </Col>
     </Row>

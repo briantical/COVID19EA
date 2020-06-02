@@ -9,8 +9,11 @@ import Canvas from '../components/Canvas';
 
 import './index.css';
 import { countries } from './../../constants/data';
+import assets from './../../assets/*.png';
 
-const WHO = require('./../../assets/who.png');
+// console.log(assets);
+
+// const WHO = require('./../../assets/who.png');
 
 interface IReport {
   country: string;
@@ -158,7 +161,7 @@ const Country: FC<{}> = () => {
             })}
           </div>
         </div>
-        <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
+        <img src={assets['who']} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
       </div>
     );
   } else {

@@ -6,11 +6,7 @@ import { Header, AutoSuggest } from '../components';
 
 import './index.css';
 
-// Assets
-const WHO = require('./../../assets/who.png');
-const about = require('./../../assets/about.png');
-const prevention = require('./../../assets/prevention.png');
-const treatment = require('./../../assets/treatment.png');
+import assets from './../../assets/*.png';
 
 const Home: FC<{}> = () => {
   return (
@@ -20,7 +16,13 @@ const Home: FC<{}> = () => {
         <AutoSuggest />
         <div id="support_information" className="row">
           <div className="col-sm support_information_div">
-            <img src={about} alt="About COVID-19" title="About COVID-19" className="img-fluid" id="support_logos_one" />
+            <img
+              src={assets['about']}
+              alt="About COVID-19"
+              title="About COVID-19"
+              className="img-fluid"
+              id="support_logos_one"
+            />
             <div className="col information">
               <div className="info_header">About COVID-19</div>
               <span className="info">An up-to-date rundown of the virus and its symptoms.</span>
@@ -29,7 +31,7 @@ const Home: FC<{}> = () => {
           </div>
           <div className="col-sm support_information_div">
             <img
-              src={prevention}
+              src={assets['prevention']}
               alt="Preventing COVID-19"
               title="Preventing COVID-19"
               className="img-fluid"
@@ -44,7 +46,7 @@ const Home: FC<{}> = () => {
           </div>
           <div className="col-sm support_information_div">
             <img
-              src={treatment}
+              src={assets['treatment']}
               alt="Treatment for COVID-19"
               title="Treatment for COVID-19"
               className="img-fluid"
@@ -66,7 +68,7 @@ const Home: FC<{}> = () => {
           <p>COVID19EA</p>
         </div>
       </div>
-      <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
+      <img src={assets['header_logo']} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
     </div>
   );
 };

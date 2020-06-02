@@ -9,7 +9,7 @@
     "client": "parcel client/public/index.html --open",
     "build": "parcel build client/public/index.html --public-url ./",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "dev": "concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "startserver": "cd dist/server && node index",
     "postinstall": "tsc"
@@ -19,11 +19,7 @@
     "url": "git+https://github.com/briantical/COVID19EA.git"
   },
   "homepage": "http://briantical.github.io/covid19ea",
-  "keywords": [
-    "Covid19",
-    "Coronavirus",
-    "East Africa"
-  ],
+  "keywords": ["Covid19", "Coronavirus", "East Africa"],
   "author": "LUTAAYA Brian Ivan",
   "license": "MIT",
   "bugs": {
