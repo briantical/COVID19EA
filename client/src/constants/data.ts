@@ -30,3 +30,6 @@ export const countries = [
   //   org: 'WHOAFRO'
   // }
 ];
+
+export const SERVER_ENDPOINT =
+  process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://covid19ea.herokuapp.com';

@@ -8,7 +8,7 @@ import { Header } from '../components';
 import Canvas from '../components/Canvas';
 
 import './index.css';
-import { countries } from './../../constants/data';
+import { countries, SERVER_ENDPOINT } from './../../constants/data';
 import assets from './../../assets/*.png';
 
 interface IReport {
@@ -53,7 +53,7 @@ const Country: FC<{}> = () => {
     countries.map((country) => {
       if (country.name === _country) {
         axios
-          .get(`${process.env.SERVER_ENDPOINT}/api/twitter/?trend=${country.trend}`)
+          .get(`${SERVER_ENDPOINT}/api/twitter/?trend=${country.trend}`)
           .then((response) => {
             const {
               data: { tweets: _tweets }
@@ -74,7 +74,7 @@ const Country: FC<{}> = () => {
 
   const getReportByCountry = (country: string) => {
     axios
-      .get(`${process.env.SERVER_ENDPOINT}/api/covid/country/${country.toLocaleLowerCase()}`)
+      .get(`${SERVER_ENDPOINT}/api/covid/country/${country.toLocaleLowerCase()}`)
       .then((response) => {
         const {
           data: { report: _report }
@@ -86,7 +86,7 @@ const Country: FC<{}> = () => {
 
   const getCountryStatistics = async (country: string) => {
     axios
-      .get(`${process.env.SERVER_ENDPOINT}/api/covid/statistics/${country}`)
+      .get(`${SERVER_ENDPOINT}/api/covid/statistics/${country}`)
       .then((response) => {
         const {
           data: { reports: _reports }

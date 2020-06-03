@@ -7,6 +7,7 @@ declare const process: {
     CONSUMER_API_SECRET_KEY: string;
     ACCESS_TOKEN: string;
     ACCESS_TOKEN_SECRET: string;
+    NODE_ENV: string;
     SERVER_ENDPOINT: string;
   };
 };
@@ -18,6 +19,7 @@ const envs = {
   ACCESS_TOKEN_SECRET: process.env.ACCESS_TOKEN_SECRET,
   CONSUMER_API_KEY: process.env.CONSUMER_API_KEY,
   CONSUMER_API_SECRET_KEY: process.env.CONSUMER_API_SECRET_KEY,
-  SERVER_ENDPOINT: process.env.SERVER_ENDPOINT
+  SERVER_ENDPOINT: process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : 'https://covid19ea.herokuapp.com'
 };
+
 export default envs;

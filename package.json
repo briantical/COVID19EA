@@ -13,7 +13,7 @@
     "build": "parcel build client/public/index.html --public-url ./",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "dev": "concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev": "NODE_ENV=development concurrently  --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "start": "cd dist/server && node index",
     "postinstall": "tsc"
   },
