@@ -1,7 +1,7 @@
 // Native modules
 import React, { FC } from 'react';
 import { withRouter } from 'react-router-dom';
-import { Row, Col } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 
 import { Header, AutoSuggest } from '../components';
 
