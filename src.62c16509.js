@@ -50144,23 +50144,23 @@ exports.TwitterOnAirButton = TwitterOnAirButton;
 });
 },{"@babel/runtime/helpers/esm/classCallCheck":"../../node_modules/@babel/runtime/helpers/esm/classCallCheck.js","@babel/runtime/helpers/esm/createClass":"../../node_modules/@babel/runtime/helpers/esm/createClass.js","@babel/runtime/helpers/esm/possibleConstructorReturn":"../../node_modules/@babel/runtime/helpers/esm/possibleConstructorReturn.js","@babel/runtime/helpers/esm/getPrototypeOf":"../../node_modules/@babel/runtime/helpers/esm/getPrototypeOf.js","@babel/runtime/helpers/esm/inherits":"../../node_modules/@babel/runtime/helpers/esm/inherits.js","@babel/runtime/helpers/esm/defineProperty":"../../node_modules/@babel/runtime/helpers/esm/defineProperty.js","react":"../../node_modules/react/index.js","prop-types":"../../node_modules/prop-types/index.js","react-proptype-conditional-require":"../../node_modules/react-proptype-conditional-require/dist/isRequiredIf.js","exenv":"../../node_modules/exenv/index.js","scriptjs":"../../node_modules/scriptjs/dist/script.js"}],"../src/assets/about.png":[function(require,module,exports) {
 module.exports = "/about.48d4e98f.png";
-},{}],"../src/assets/header_logo.png":[function(require,module,exports) {
-module.exports = "/header_logo.18a0c155.png";
 },{}],"../src/assets/prevention.png":[function(require,module,exports) {
 module.exports = "/prevention.bf637da5.png";
 },{}],"../src/assets/treatment.png":[function(require,module,exports) {
 module.exports = "/treatment.f4d2a2d4.png";
+},{}],"../src/assets/header_logo.png":[function(require,module,exports) {
+module.exports = "/header_logo.18a0c155.png";
 },{}],"../src/assets/who.png":[function(require,module,exports) {
 module.exports = "/who.acd0d73c.png";
 },{}],"../src/assets/*.png":[function(require,module,exports) {
 module.exports = {
   "about": require("./about.png"),
-  "header_logo": require("./header_logo.png"),
   "prevention": require("./prevention.png"),
   "treatment": require("./treatment.png"),
+  "header_logo": require("./header_logo.png"),
   "who": require("./who.png")
 };
-},{"./about.png":"../src/assets/about.png","./header_logo.png":"../src/assets/header_logo.png","./prevention.png":"../src/assets/prevention.png","./treatment.png":"../src/assets/treatment.png","./who.png":"../src/assets/who.png"}],"../src/containers/components/Header.tsx":[function(require,module,exports) {
+},{"./about.png":"../src/assets/about.png","./prevention.png":"../src/assets/prevention.png","./treatment.png":"../src/assets/treatment.png","./header_logo.png":"../src/assets/header_logo.png","./who.png":"../src/assets/who.png"}],"../src/containers/components/Header.tsx":[function(require,module,exports) {
 "use strict";
 
 var __importDefault = this && this.__importDefault || function (mod) {
@@ -50197,7 +50197,10 @@ var Header = function Header() {
   }, "Support")), react_1.default.createElement(react_bootstrap_1.Col, {
     className: "col-3 commons_vertical"
   }, react_1.default.createElement(react_router_dom_1.Link, {
-    to: "/"
+    to: "/",
+    style: {
+      width: '100%'
+    }
   }, react_1.default.createElement("img", {
     className: "img-fluid",
     src: __png_1.default['header_logo'],
@@ -52282,7 +52285,7 @@ module.exports = require('./Autosuggest')["default"];
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.countries = void 0;
+exports.SERVER_ENDPOINT = exports.countries = void 0;
 exports.countries = [{
   name: 'Burundi',
   trend: 'COVID19BUR',
@@ -52309,6 +52312,7 @@ exports.countries = [{
 //   org: 'WHOAFRO'
 // }
 ];
+exports.SERVER_ENDPOINT = "development" === 'development' ? 'http://localhost:4000' : 'https://covid19ea.herokuapp.com';
 },{}],"../src/containers/components/AutoSuggest.tsx":[function(require,module,exports) {
 "use strict";
 
@@ -52932,7 +52936,7 @@ var Country = function Country() {
   var getTweetsSince = function getTweetsSince(_country) {
     data_1.countries.map(function (country) {
       if (country.name === _country) {
-        axios_1.default.get("https://covid19ea.herokuapp.com" + "/api/twitter/?trend=" + country.trend).then(function (response) {
+        axios_1.default.get(data_1.SERVER_ENDPOINT + "/api/twitter/?trend=" + country.trend).then(function (response) {
           var _tweets = response.data.tweets;
           setTweets(_tweets); // This is to eliminate i "is declared but its value is never read."
 
@@ -52948,7 +52952,7 @@ var Country = function Country() {
   };
 
   var getReportByCountry = function getReportByCountry(country) {
-    axios_1.default.get("https://covid19ea.herokuapp.com" + "/api/covid/country/" + country.toLocaleLowerCase()).then(function (response) {
+    axios_1.default.get(data_1.SERVER_ENDPOINT + "/api/covid/country/" + country.toLocaleLowerCase()).then(function (response) {
       var _report = response.data.report;
       setCountryReport(_report);
     }).catch(function (error) {
@@ -52959,7 +52963,7 @@ var Country = function Country() {
   var getCountryStatistics = function getCountryStatistics(country) {
     return __awaiter(void 0, void 0, void 0, function () {
       return __generator(this, function (_a) {
-        axios_1.default.get("https://covid19ea.herokuapp.com" + "/api/covid/statistics/" + country).then(function (response) {
+        axios_1.default.get(data_1.SERVER_ENDPOINT + "/api/covid/statistics/" + country).then(function (response) {
           var _reports = response.data.reports;
           setCountryReports(_reports);
         }).catch(function (error) {
@@ -53110,6 +53114,8 @@ var react_1 = __importDefault(require("react"));
 
 var react_router_dom_1 = require("react-router-dom");
 
+var react_bootstrap_1 = require("react-bootstrap");
+
 var components_1 = require("../components");
 
 require("./index.css");
@@ -53125,9 +53131,10 @@ var Home = function Home() {
     }
   }, react_1.default.createElement(components_1.Header, null), react_1.default.createElement("div", {
     className: "content"
-  }, react_1.default.createElement(components_1.AutoSuggest, null), react_1.default.createElement("div", {
+  }, react_1.default.createElement(components_1.AutoSuggest, null), react_1.default.createElement(react_bootstrap_1.Row, {
+    noGutters: true,
     id: "support_information",
-    className: "row"
+    className: "commons_horizontal"
   }, react_1.default.createElement("div", {
     className: "col-sm support_information_div"
   }, react_1.default.createElement("img", {
@@ -53174,12 +53181,18 @@ var Home = function Home() {
     className: "info_header"
   }, "Treatment"), react_1.default.createElement("span", {
     className: "info"
-  }, "Guidance on testing , keeping healthy and treatment"), react_1.default.createElement("a", {
+  }, "Guidance on testing, keeping healthy and treatment"), react_1.default.createElement("a", {
     href: "/treatment"
-  }, "Learn more ...")))), react_1.default.createElement("div", {
-    id: "about_website"
-  }, react_1.default.createElement("p", null, "This website is a resource to help inform the public, in order to guide a response, improve care, and save lives."), react_1.default.createElement("p", null, "COVID19EA"))), react_1.default.createElement("img", {
-    src: __png_1.default['header_logo'],
+  }, "Learn more ...")))), react_1.default.createElement(react_bootstrap_1.Row, {
+    noGutters: true,
+    id: "about_website",
+    className: "commons_vertical"
+  }, react_1.default.createElement("p", null, "This website is a resource to help inform the public, in order to guide a response, improve care, and save lives."), react_1.default.createElement("p", {
+    style: {
+      fontWeight: 'bold'
+    }
+  }, "COVID19EA"))), react_1.default.createElement("img", {
+    src: __png_1.default['who'],
     alt: "WHO Log",
     title: "Data provided by WHO",
     className: "img-fluid",
@@ -53188,7 +53201,7 @@ var Home = function Home() {
 };
 
 exports.default = react_router_dom_1.withRouter(Home);
-},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","../components":"../src/containers/components/index.ts","./index.css":"../src/containers/Home/index.css","./../../assets/*.png":"../src/assets/*.png"}],"../src/containers/index.ts":[function(require,module,exports) {
+},{"react":"../../node_modules/react/index.js","react-router-dom":"../../node_modules/react-router-dom/esm/react-router-dom.js","react-bootstrap":"../../node_modules/react-bootstrap/esm/index.js","../components":"../src/containers/components/index.ts","./index.css":"../src/containers/Home/index.css","./../../assets/*.png":"../src/assets/*.png"}],"../src/containers/index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -53350,7 +53363,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65086" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56134" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
