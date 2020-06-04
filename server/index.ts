@@ -1,14 +1,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import { config } from 'dotenv';
-// specify a custom path if your file containing environment variables is located elsewhere
-config({ path: './../.env' });
 
 import api from './routes';
 import { Logger } from './../utils';
 
 const app = express();
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

@@ -1,82 +1,115 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
-import MyChart from '../components/_Chart';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
-import twitter from '../../utils/twitter';
+import { useParams, Redirect } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
+import { TwitterTimelineEmbed } from 'react-twitter-embed';
 
 import { Header } from '../components';
-import { setCountryReport, setCountryReports, setErrorMessage } from '../../actions';
+import Canvas from '../components/Canvas';
 
-const WHO = require('./../../assets/who.png');
+import './index.css';
+import { countries, SERVER_ENDPOINT } from './../../constants/data';
+import assets from './../../assets/*.png';
 
-export class Country extends Component {
-  constructor(props) {
-    super(props);
-    let {
-      match: {
-        params: { country }
+interface IReport {
+  country: string;
+  flag: string;
+  cases: number;
+  deaths: number;
+  recovered: number;
+}
+
+interface IReports {
+  date: string;
+  confirmed: number;
+  deaths: number;
+  recovered: number;
+}
+
+const initialReport: IReport = {
+  country: '__',
+  flag: '__',
+  cases: 0,
+  deaths: 0,
+  recovered: 0
+};
+
+const initialReports: IReports = {
+  date: '2019-12-01',
+  confirmed: 0,
+  deaths: 0,
+  recovered: 0
+};
+
+const Country: FC<{}> = () => {
+  const { country } = useParams();
+
+  const [error, setErrorMessage] = useState('');
+  const [tweets, setTweets] = useState<string[]>(['1222968733829865477']);
+  const [reports, setCountryReports] = useState<IReports[]>([initialReports]);
+  const [report, setCountryReport] = useState<IReport>(initialReport);
+
+  const getTweetsSince = (_country: string) => {
+    countries.map((country) => {
+      if (country.name === _country) {
+        axios
+          .get(`${SERVER_ENDPOINT}/api/twitter/?trend=${country.trend}`)
+          .then((response) => {
+            const {
+              data: { tweets: _tweets }
+            } = response;
+            setTweets(_tweets);
+            // This is to eliminate i "is declared but its value is never read."
+            JSON.stringify(error);
+          })
+          .catch((error) => {
+            setTweets(['1222968733829865477']);
+            // This is to eliminate i "is declared but its value is never read."
+            JSON.stringify(tweets);
+            setErrorMessage(error);
+          });
       }
-    } = this.props;
-    this.getTweetsSince('Brian', '2020-01-23');
-    this.getReportByCountry(country.toLowerCase());
-    this.getReportsByCountry(country);
-  }
-
-  getReportByCountry = async (country) => {
-    try {
-      let country_report = await axios.get(
-        `https://covid19-server.chrismichael.now.sh/api/v1/ReportsByCountries/${country.toLowerCase()}`
-      );
-      let {
-        data: { report }
-      } = country_report;
-      this.props.setCountryReport(report);
-    } catch (error) {
-      this.props.setErrorMessage(error);
-    }
+    });
   };
 
-  getReportsByCountry = async (country) => {
-    try {
-      let country_reports = await axios.get(`https://pomber.github.io/covid19/timeseries.json`);
-      let {
-        data: { [country]: reports }
-      } = country_reports;
-
-      this.props.setCountryReports(reports);
-    } catch (error) {
-      console.log(error);
-      this.props.setErrorMessage(error);
-    }
+  const getReportByCountry = (country: string) => {
+    axios
+      .get(`${SERVER_ENDPOINT}/api/covid/country/${country.toLocaleLowerCase()}`)
+      .then((response) => {
+        const {
+          data: { report: _report }
+        } = response;
+        setCountryReport(_report);
+      })
+      .catch((error) => setErrorMessage(error));
   };
 
-  getTweetsSince = async (keyword, period) => {
-    try {
-      await twitter.get('search/tweets', { q: keyword + ' since:' + period, count: 100 }, function (
-        err,
-        data,
-        response
-      ) {
-        console.log(data);
-        return data;
-      });
-    } catch (error) {
-      return error;
-    }
+  const getCountryStatistics = async (country: string) => {
+    axios
+      .get(`${SERVER_ENDPOINT}/api/covid/statistics/${country}`)
+      .then((response) => {
+        const {
+          data: { reports: _reports }
+        } = response;
+        setCountryReports(_reports);
+      })
+      .catch((error) => setErrorMessage(error));
   };
 
-  render() {
-    let {
-      report: { country = '__', flag, cases = '__', deaths = '__', recovered = '__' }
-    } = this.props;
+  useEffect(() => {
+    getTweetsSince(country);
+    getReportByCountry(country);
+    getCountryStatistics(country);
+  }, [country]);
 
+  const { flag, cases, deaths, recovered } = report;
+  if (['Uganda', 'Kenya', 'Tanzania', 'Rwanda', 'Burundi'].includes(country)) {
     return (
       <div className="container-fluid no-gutters px-0" style={{ position: 'relative', overflow: 'scroll' }}>
         <Header />
         <div className="row content no-gutters">
           <div className="col-sm-8">
-            <div className="row" style={{ margin: '0rem 1rem' }}>
+            <div className="row" style={{ margin: '1rem' }}>
               <table className="table table-hover table-striped">
                 <thead className="thead-dark">
                   <tr>
@@ -87,7 +120,7 @@ export class Country extends Component {
                   <tr>
                     <td>Country</td>
                     <td>
-                      <img src={flag} title={`${country} flag`} alt={`${country}`} />
+                      <img src={flag} title={`${country} flag`} alt={`${country}`} style={{ maxHeight: '2rem' }} />
                     </td>
                   </tr>
                   <tr>
@@ -105,29 +138,31 @@ export class Country extends Component {
                 </tbody>
               </table>
             </div>
-            <div>
-              <MyChart />
-            </div>
+            <Row noGutters id="canvas">
+              <Canvas reports={reports} />
+            </Row>
           </div>
           <div className="col-sm-4">
-            <TwitterTweetEmbed tweetId={'933354946111705097'} />
+            {countries.map((_country, index) => {
+              if (_country.name == country) {
+                return (
+                  <TwitterTimelineEmbed
+                    sourceType="profile"
+                    screenName={_country.org}
+                    options={{ height: 600 }}
+                    key={index}
+                  />
+                );
+              }
+            })}
           </div>
         </div>
-        <img src={WHO} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
+        <img src={assets['who']} alt="WHO Log" title="Data provided by WHO" className="img-fluid" id="who_logo" />
       </div>
     );
+  } else {
+    return <Redirect to="/" />;
   }
-}
-
-const mapStateToProps = (state) => {
-  let { report, reports, error } = state;
-  return { report, reports, error };
 };
 
-const mapDispatchToProps = {
-  setCountryReport,
-  setCountryReports,
-  setErrorMessage
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Country);
+export default Country;
