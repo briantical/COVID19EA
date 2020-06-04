@@ -1,6 +1,6 @@
 {
   "name": "covid19ea",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "The tracker for the impact of Covid19 in East Africa",
   "main": "index.js",
   "engines": {
