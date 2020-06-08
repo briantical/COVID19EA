@@ -33,3 +33,5 @@ Create a .env file with the following tokens:
 <img src="./screenshots/Screenshot 2020-05-30 at 04.05.26.png">
 <img src="./screenshots/Screenshot 2020-05-30 at 04.07.32.png">
 <img src="./screenshots/Screenshot 2020-05-30 at 04.04.42.png">
+
+### Not further updates will be provided for the project.
