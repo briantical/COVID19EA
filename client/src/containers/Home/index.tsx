@@ -26,7 +26,7 @@ const Home: FC<{}> = () => {
             <div className="col information">
               <div className="info_header">About COVID-19</div>
               <span className="info">An up-to-date rundown of the virus and its symptoms.</span>
-              <a href="/aboutcovid">Learn more ...</a>
+              <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">Learn more ...</a>
             </div>
           </div>
           <div className="col-sm support_information_div">
@@ -41,7 +41,7 @@ const Home: FC<{}> = () => {
             <div className="col information">
               <div className="info_header">Prevention</div>
               <span className="info">Information about social distancing, sanitizing, and more.</span>
-              <a href="/prevention">Learn more ...</a>
+              <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">Learn more ...</a>
             </div>
           </div>
           <div className="col-sm support_information_div">
@@ -56,7 +56,7 @@ const Home: FC<{}> = () => {
             <div className="col information">
               <div className="info_header">Treatment</div>
               <span className="info">Guidance on testing, keeping healthy and treatment</span>
-              <a href="/treatment">Learn more ...</a>
+              <a href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">Learn more ...</a>
             </div>
           </div>
         </Row>

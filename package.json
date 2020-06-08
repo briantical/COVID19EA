@@ -22,7 +22,11 @@
     "url": "git+https://github.com/briantical/COVID19EA.git"
   },
   "homepage": "http://briantical.github.io/covid19ea",
-  "keywords": ["Covid19", "Coronavirus", "East Africa"],
+  "keywords": [
+    "Covid19",
+    "Coronavirus",
+    "East Africa"
+  ],
   "author": "LUTAAYA Brian Ivan",
   "license": "MIT",
   "bugs": {

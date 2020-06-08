@@ -9,10 +9,10 @@ const Header = () => {
     <Row noGutters className="align-items-center justify-content-end" id="header">
       <Col></Col>
       <Col className="col-2 commons_vertical">
-        <Link to="/resources">Resources</Link>
+        <Link to="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">Resources</Link>
       </Col>
       <Col className="col-2 commons_vertical">
-        <Link to="/support">Support</Link>
+        <Link to="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">Support</Link>
       </Col>
       <Col className="col-3 commons_vertical">
         <Link to="/" style={{ width: '100%' }}>
