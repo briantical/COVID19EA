@@ -8,7 +8,7 @@ Covid19ea is a web application to assist and provided consolidated data on the C
 Uganda, Kenya, Tanzania, Rwanda and Burundi).
 The data is collected from the [Covid19-api]() package and a timeseries by Pomber.
 
-Visit the site here [here](http://covidea.briantical.me)
+Visit the site here [here](https://covid19ea.briantical.me)
 
 ## Get started
 
